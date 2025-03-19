@@ -29,9 +29,11 @@ class Board {
 			"start": data.grids[0].value.map(e => e),
 			"solution": data.grids[0].solution.map(e => e)
 		};
-		this.difficulty = this.grid.difficulty;
-		console.log("fetched new board", this.grid);
-		console.log("value clone success: ", !(this.grid.value == this.grid.start));
+		this.difficulty = data.grids[0].difficulty;
+		console.log("fetched new board", this.grid,
+			"\nBoard difficulty",this.difficulty,
+			"\nvalue clone success", !(this.grid.value == this.grid.start)
+		);
 	};
 	
 	renderText() {
@@ -47,12 +49,10 @@ class Board {
 		this.gridEl.innerHTML = "";
 		let numbers = this.grid.value.flat().map(number => number != 0 ? number.toString() : "");
 		let startNum = this.grid.start.flat();
-		console.log(numbers, startNum)
 		for (let [index, number] of Object.entries(numbers)) {
 			let el = document.createElement("span");
 			el.classList.add("cell");
 			if (startNum[index] != 0) {
-				console.log(number, startNum[index])
 				el.classList.add("fixed");
 			};
 			if (game) {
@@ -63,10 +63,10 @@ class Board {
 			
 			this.gridEl.appendChild(el);
 		};
-		console.log(this.gridEl)
+		console.log("Rendered too HTML")
 	};
 	renderInfo() {
-		let difficulty = this.infoEl.getElementById("difficulty");
+		let difficulty = this.infoEl.querySelector("#difficulty");
 		difficulty.innerText = `Difficulty: ${this.difficulty}`;
 	};
 }
@@ -81,6 +81,7 @@ class Game {
 		console.log(this.board);
 		this.board.newBoard().then(() => {
 			this.board.renderHTML(this);
+			this.board.renderInfo();
 		});
 		document.addEventListener("keydown", (e) => this.handleKeyPress(e))
 	}
@@ -183,4 +184,3 @@ class Game {
 }
 
 let game = new Game(apiURL, gridEl, infoEl);
-game.board.renderInfo()
