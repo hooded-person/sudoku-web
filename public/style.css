@@ -1,0 +1,46 @@
+.grid {
+	background: white;
+	/* border: 2.5px solid black; */
+	
+	
+	width: 40%;
+	aspect-ratio: 1;
+	
+	display: grid;
+
+	grid-template-columns: repeat(9, 1fr);
+}
+
+.cell {
+	background: white;
+	border: 2px solid gray;
+	font-size: 25px;
+	
+	aspect-ratio: 1;
+	
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	text-align: center;
+}
+.grid > .cell:nth-child(3n) {
+	border-right: 5px solid dimgray;
+}
+
+.grid > .cell:nth-child(9n) {
+	border-right: 2px solid gray;
+}
+.grid > .cell:nth-child(n+19):nth-child(-n+27) {
+	border-bottom: 5px solid dimgray;
+}
+.grid > .cell:nth-child(n+46):nth-child(-n+54) {
+	border-bottom: 5px solid dimgray;
+}
+
+.cell.fixed {
+	background: lightgray;
+}
+.cell.selected {
+	background: #05ace4;
+	border: 2px solid #0492C2;
+}
