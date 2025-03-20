@@ -2,9 +2,11 @@
 
 // config
 let apiURL = "https://sudoku-api.vercel.app/api/dosuku";
+let outputFolder = "./output";
+let dataFile = "/data.json"
 let delay = 100;
 let maxTimeout = 300;
-let times = 1000;
+let times = 100;
 
 // import other libs
 import { Agent, fetch } from "undici";
@@ -94,10 +96,10 @@ for (const key of sortedKeys) {
 
 import * as fs from "node:fs";
 try {
-    let outputLog = fs.readFileSync('./output.json')
+    let outputLog = fs.readFileSync(outputFolder + dataFile)
     let fileOutput = JSON.parse(outputLog)
     fileOutput.push(content)
-    fs.writeFileSync('./output.json', JSON.stringify(fileOutput));
+    fs.writeFileSync(outputFolder + dataFile, JSON.stringify(fileOutput));
     // file written successfully
 } catch (err) {
     console.error(err);
