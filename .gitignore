@@ -1,4 +1,4 @@
 node_modules
 
 # output of /index.mjs
-/output
+/output/data.json
